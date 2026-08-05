@@ -3,9 +3,9 @@
 @import "fumadocs-ui/css/preset.css";
 
 :root {
-  --color-fd-primary: #eab308;
+  --color-fd-primary: #e19b05;
   --color-fd-primary-foreground: #1d1d1d;
-  --color-fd-ring: #eab308;
+  --color-fd-ring: #e19b05;
 }
 
 .dark {
