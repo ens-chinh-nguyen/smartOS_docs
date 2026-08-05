@@ -1,15 +1,17 @@
 import { getPageImageUrl, source } from '@/lib/source';
 import { notFound } from 'next/navigation';
-import { ImageResponse } from 'next/og';
 import { generate as DefaultImage } from 'fumadocs-ui/og';
 import { appName } from '@/lib/shared';
 
 export const revalidate = false;
+export const dynamic = 'force-static';
 
 export async function GET(_req: Request, { params }: RouteContext<'/og/docs/[...slug]'>) {
   const { slug } = await params;
   const page = source.getPage(slug.slice(0, -1));
   if (!page) notFound();
+
+  const { ImageResponse } = await import('next/og');
 
   return new ImageResponse(
     <DefaultImage title={page.data.title} description={page.data.description} site={appName} />,
