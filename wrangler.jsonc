@@ -1,7 +1,7 @@
 {
   "$schema": "node_modules/wrangler/config-schema.json",
   "main": ".open-next/worker.js",
-  "name": "smartos-ql-docs",
+  "name": "smartos-docs",
   "compatibility_date": "2026-08-05",
   "compatibility_flags": [
     // Enable Node.js API
@@ -18,7 +18,7 @@
   "services": [
     {
       "binding": "WORKER_SELF_REFERENCE",
-      "service": "smartos-ql-docs"
+      "service": "smartos-docs"
     }
   ],
   "observability": {
