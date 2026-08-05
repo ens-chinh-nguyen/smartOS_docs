@@ -1,14 +1,14 @@
-import Link from 'next/link';
-import { 
-  Key, 
-  Wrench, 
-  ArrowRight, 
-  ShieldCheck, 
-  FileText, 
-  Layers, 
+import Link from "next/link";
+import {
+  Key,
+  Wrench,
+  ArrowRight,
+  ShieldCheck,
+  FileText,
+  Layers,
   Cpu,
-  Clock
-} from 'lucide-react';
+  Clock,
+} from "lucide-react";
 
 export default function HomePage() {
   return (
@@ -25,11 +25,24 @@ export default function HomePage() {
         </div>
 
         <h1 className="text-4xl md:text-6xl font-extrabold tracking-tight mb-6">
-          SmartOS <span className="text-fd-primary underline decoration-fd-primary/40 decoration-wavy underline-offset-8">Technical Docs</span>
+          SmartOS{" "}
+          <span className="text-fd-primary underline decoration-fd-primary/40 decoration-wavy underline-offset-8">
+            Technical Docs
+          </span>
         </h1>
 
         <p className="text-lg md:text-xl text-neutral-600 dark:text-neutral-400 max-w-3xl mx-auto mb-10 leading-relaxed">
-          Centralized documentation portal for system architecture, API specifications, and operational workflows for two core independent modules: <span className="font-semibold text-neutral-800 dark:text-neutral-200">Access Management</span> and <span className="font-semibold text-neutral-800 dark:text-neutral-200">Maintenance Management</span>.
+          Centralized documentation portal for system architecture, API
+          specifications, and operational workflows for two core independent
+          modules:{" "}
+          <span className="font-semibold text-neutral-800 dark:text-neutral-200">
+            Access Management
+          </span>{" "}
+          and{" "}
+          <span className="font-semibold text-neutral-800 dark:text-neutral-200">
+            Maintenance Management
+          </span>
+          .
         </p>
 
         {/* CTA Button */}
@@ -51,7 +64,8 @@ export default function HomePage() {
             Product Modules Catalog
           </h2>
           <p className="text-neutral-500 dark:text-neutral-400">
-            Select a module to access integration guides, workflows, and API specifications
+            Select a module to access integration guides, workflows, and API
+            specifications
           </p>
         </div>
 
@@ -64,10 +78,14 @@ export default function HomePage() {
               </div>
               <h3 className="text-xl font-bold mb-3 text-neutral-900 dark:text-neutral-100 flex items-center gap-2">
                 Access Management Module
-                <span className="text-xs px-2 py-0.5 rounded bg-fd-primary/10 text-fd-primary dark:text-fd-primary border border-fd-primary/20 font-normal">New</span>
+                <span className="text-xs px-2 py-0.5 rounded bg-fd-primary/10 text-fd-primary dark:text-fd-primary border border-fd-primary/20 font-normal">
+                  New
+                </span>
               </h3>
               <p className="text-neutral-600 dark:text-neutral-400 text-sm mb-6 leading-relaxed">
-                Enterprise access control solution for building entry, granular permission management, IoT device integrations (Smart Locks, QR Codes, RFID Cards, Biometrics), and real-time access logging.
+                Enterprise access control solution for building entry, granular
+                permission management, IoT device integrations (Smart Locks, QR
+                Codes, RFID Cards, Biometrics), and real-time access logging.
               </p>
 
               <div className="space-y-2 mb-8">
@@ -77,7 +95,9 @@ export default function HomePage() {
                 </div>
                 <div className="flex items-center gap-2 text-xs text-neutral-500 dark:text-neutral-400">
                   <ShieldCheck className="w-4 h-4 text-fd-primary shrink-0" />
-                  <span>Granular Access Permissions by Floor / Room / Building</span>
+                  <span>
+                    Granular Access Permissions by Floor / Room / Building
+                  </span>
                 </div>
                 <div className="flex items-center gap-2 text-xs text-neutral-500 dark:text-neutral-400">
                   <Clock className="w-4 h-4 text-fd-primary shrink-0" />
@@ -103,10 +123,14 @@ export default function HomePage() {
               </div>
               <h3 className="text-xl font-bold mb-3 text-neutral-900 dark:text-neutral-100 flex items-center gap-2">
                 Maintenance Management Module
-                <span className="text-xs px-2 py-0.5 rounded bg-fd-primary/10 text-fd-primary dark:text-fd-primary border border-fd-primary/20 font-normal">New</span>
+                <span className="text-xs px-2 py-0.5 rounded bg-fd-primary/10 text-fd-primary dark:text-fd-primary border border-fd-primary/20 font-normal">
+                  New
+                </span>
               </h3>
               <p className="text-neutral-600 dark:text-neutral-400 text-sm mb-6 leading-relaxed">
-                End-to-end technical incident management, preventive maintenance scheduling, maintenance ticket tracking, and automated technician dispatching.
+                End-to-end technical incident management, preventive maintenance
+                scheduling, maintenance ticket tracking, and automated
+                technician dispatching.
               </p>
 
               <div className="space-y-2 mb-8">
@@ -136,53 +160,12 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* Quick Developer Resources Section */}
-      <section className="py-12 px-6 max-w-6xl mx-auto w-full border-t border-neutral-200 dark:border-neutral-800 mt-8 mb-12">
-        <h3 className="text-lg font-bold mb-6 text-neutral-900 dark:text-neutral-100">
-          Internal Developer & Technical Resources
-        </h3>
-        <div className="grid sm:grid-cols-3 gap-4">
-          <Link
-            href="/docs"
-            className="p-4 rounded-xl border border-neutral-200 dark:border-neutral-800 bg-white dark:bg-neutral-900 hover:border-fd-primary/40 transition-colors group"
-          >
-            <div className="font-semibold text-sm mb-1 group-hover:text-fd-primary transition-colors">
-              📘 Overview Architecture
-            </div>
-            <div className="text-xs text-neutral-500 dark:text-neutral-400">
-              System architecture overview & module integration maps
-            </div>
-          </Link>
-
-          <Link
-            href="/docs"
-            className="p-4 rounded-xl border border-neutral-200 dark:border-neutral-800 bg-white dark:bg-neutral-900 hover:border-fd-primary/40 transition-colors group"
-          >
-            <div className="font-semibold text-sm mb-1 group-hover:text-fd-primary transition-colors">
-              ⚡ API & Auth Guidelines
-            </div>
-            <div className="text-xs text-neutral-500 dark:text-neutral-400">
-              RESTful API standards, Authentication tokens & Webhooks
-            </div>
-          </Link>
-
-          <Link
-            href="/docs"
-            className="p-4 rounded-xl border border-neutral-200 dark:border-neutral-800 bg-white dark:bg-neutral-900 hover:border-fd-primary/40 transition-colors group"
-          >
-            <div className="font-semibold text-sm mb-1 group-hover:text-fd-primary transition-colors">
-              📝 Docs Contribution Guide
-            </div>
-            <div className="text-xs text-neutral-500 dark:text-neutral-400">
-              Workflow for authoring and updating MDX documentation
-            </div>
-          </Link>
-        </div>
-      </section>
-
       {/* Footer Branding Banner */}
       <footer className="py-6 px-6 border-t border-neutral-200 dark:border-neutral-800 bg-white dark:bg-neutral-900 text-center text-xs text-neutral-500 dark:text-neutral-400 mt-auto">
-        <p>© {new Date().getFullYear()} SmartOS Solutions. Internal Documentation Portal.</p>
+        <p>
+          © {new Date().getFullYear()} SmartOS Solutions. Internal Documentation
+          Portal.
+        </p>
       </footer>
     </div>
   );
