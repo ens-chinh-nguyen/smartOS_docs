@@ -1,0 +1,95 @@
+---
+title: MCP Server
+description: How to connect Claude Desktop, Claude Code, Cursor, and other MCP clients to this documentation site for AI-assisted docs search and retrieval.
+---
+
+# 🔌 MCP Server Integration
+
+This documentation site exposes a **Model Context Protocol (MCP)** server so AI clients (Claude Desktop, Claude Code, Cursor, ...) can search and read the docs directly instead of relying on stale training data or manual copy-paste.
+
+- **Endpoint**: `/api/mcp` (Streamable HTTP transport)
+- **Implementation**: `app/api/mcp/route.ts` using [`mcp-handler`](https://www.npmjs.com/package/mcp-handler)
+- **Auth**: none — public read-only access to published docs
+
+<Callout type="warn" title="No authentication">
+  The endpoint is unauthenticated and read-only. Do not put sensitive/internal-only content in `content/docs` if this server is publicly reachable.
+</Callout>
+
+## Available Tools
+
+| Tool | Description | Input |
+|---|---|---|
+| `search_docs` | Full-text search across all docs pages/sections (headings, paragraphs) | `query: string` |
+| `list_docs` | List every page with title, description, and URL | _(none)_ |
+| `get_doc` | Fetch the full Markdown content of one page | `url: string` (e.g. `/docs/auth`) |
+
+Typical flow for an AI client: `list_docs` or `search_docs` to find the relevant page → `get_doc` to pull the full content for context.
+
+## Connect a Client
+
+<Cards>
+  <Card title="Direct HTTP (recommended)" href="#direct-http">
+    For clients that support remote MCP servers over Streamable HTTP natively.
+  </Card>
+  <Card title="mcp-remote bridge" href="#stdio-bridge">
+    For stdio-only clients — bridges local stdio to the remote HTTP endpoint.
+  </Card>
+</Cards>
+
+### Direct HTTP
+
+Claude Desktop, Claude Code, and other clients with native remote-MCP support can point straight at the endpoint:
+
+```json title="claude_desktop_config.json / mcp.json"
+{
+  "mcpServers": {
+    "smartos-ql-docs": {
+      "url": "https://<your-domain>/api/mcp"
+    }
+  }
+}
+```
+
+Local development:
+
+```json
+{
+  "mcpServers": {
+    "smartos-ql-docs": {
+      "url": "http://localhost:3000/api/mcp"
+    }
+  }
+}
+```
+
+### stdio Bridge
+
+Clients that only support stdio-based MCP servers can use [`mcp-remote`](https://www.npmjs.com/package/mcp-remote) as a bridge:
+
+```json title="mcp.json"
+{
+  "mcpServers": {
+    "smartos-ql-docs": {
+      "command": "npx",
+      "args": ["-y", "mcp-remote", "https://<your-domain>/api/mcp"]
+    }
+  }
+}
+```
+
+## Verify the Connection
+
+After adding the config, restart the client and check that `smartos-ql-docs` shows up in its MCP/tools list. To sanity-check the server itself without a client:
+
+```bash
+curl -s -X POST https://<your-domain>/api/mcp \
+  -H "Content-Type: application/json" \
+  -H "Accept: application/json, text/event-stream" \
+  -d '{"jsonrpc":"2.0","id":1,"method":"tools/list"}'
+```
+
+A healthy response lists `search_docs`, `list_docs`, and `get_doc`.
+
+## Adding More Tools
+
+Tools are registered in `app/api/mcp/route.ts` via `server.registerTool(name, config, handler)`. To add a new one (e.g. a tool scoped to a single doc section), register it there following the same pattern as `search_docs` / `get_doc` — no changes needed elsewhere, since it reuses the existing `source` and `searchAPI` already wired for the website's own search bar.

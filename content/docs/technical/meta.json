@@ -1,0 +1,5 @@
+{
+  "title": "Technical",
+  "root": true,
+  "pages": ["index", "api-reference", "sources", "integrations"]
+}
