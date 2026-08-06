@@ -28,7 +28,7 @@ Next.js 16 (App Router) docs site built on **Fumadocs**, using `@fumadocs/base-u
 
 ### Content pipeline
 
-- Docs content lives in `content/docs/**/*.mdx`, organized into `meta.json`-driven navigation trees (nested folders = nested nav sections, e.g. `content/docs/technical/integrations`).
+- Docs content lives in `contents/docs/**/*.mdx`, organized into `meta.json`-driven navigation trees (nested folders = nested nav sections, e.g. `contents/docs/technical/integrations`).
 - `source.config.ts` configures the MDX compiler (`fumadocs-mdx`): mermaid diagrams via `remarkMdxMermaid`, raw HTML passthrough via `rehype-raw`.
 - `lib/source.ts` builds the `source` loader (`fumadocs-core/source` + `defineDocs`) that every route reads pages/page-tree from. It also exports:
   - `getPageImageUrl` — OG image URL for a page (consumed by `app/og/docs/[...slug]/route.tsx`)
