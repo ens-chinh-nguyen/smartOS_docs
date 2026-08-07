@@ -34,3 +34,5 @@ cloudflare-env.d.ts
 
 .playwright-mcp
 .obsidian
+
+.env
