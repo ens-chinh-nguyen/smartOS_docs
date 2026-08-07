@@ -12,6 +12,10 @@ export function baseOptions(): BaseLayoutProps {
         text: 'Docs',
         url: '/docs',
       },
+      {
+        text: 'Technical',
+        url: '/docs/technical',
+      },
     ],
     githubUrl: `https://github.com/${gitConfig.user}/${gitConfig.repo}`,
   };
