@@ -11,14 +11,58 @@ const { rewrite: rewriteSuffix } = rewritePath(
   `${docsContentRoute}{/*path}/content.md`,
 );
 
+function isPublicRoute(pathname: string): boolean {
+  return (
+    pathname === '/' ||
+    pathname.startsWith('/_next') ||
+    pathname === '/favicon.ico' ||
+    pathname === '/icon.svg'
+  );
+}
+
+function checkBasicAuth(request: NextRequest): boolean {
+  const authHeader = request.headers.get('authorization');
+  if (!authHeader || !authHeader.startsWith('Basic ')) {
+    return false;
+  }
+
+  const base64Credentials = authHeader.split(' ')[1];
+  if (!base64Credentials) return false;
+
+  try {
+    const credentials = atob(base64Credentials);
+    const [username, password] = credentials.split(':');
+
+    const expectedUser = process.env.AUTH_USER || 'admin';
+    const expectedPassword = process.env.AUTH_PASSWORD || '123456';
+
+    return username === expectedUser && password === expectedPassword;
+  } catch {
+    return false;
+  }
+}
+
 export default function middleware(request: NextRequest) {
-  const result = rewriteSuffix(request.nextUrl.pathname);
+  const pathname = request.nextUrl.pathname;
+
+  if (!isPublicRoute(pathname)) {
+    if (!checkBasicAuth(request)) {
+      return new NextResponse('Authentication Required', {
+        status: 401,
+        headers: {
+          'WWW-Authenticate': 'Basic realm="Protected Area"',
+        },
+      });
+    }
+  }
+
+  const result = rewriteSuffix(pathname);
   if (result) {
     return NextResponse.rewrite(new URL(result, request.nextUrl));
   }
 
   if (isMarkdownPreferred(request)) {
-    const result = rewriteDocs(request.nextUrl.pathname);
+    const result = rewriteDocs(pathname);
 
     if (result) {
       return NextResponse.rewrite(new URL(result, request.nextUrl), {
@@ -30,3 +74,4 @@ export default function middleware(request: NextRequest) {
 
   return NextResponse.next();
 }
+
