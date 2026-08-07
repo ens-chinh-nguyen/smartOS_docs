@@ -28,3 +28,5 @@ The User module is split into two nested feature domains:
 - **Post-Auth Hydration**: Profile data is fetched immediately following [Successful Login](/docs/auth/login-flow).
 - **MFA Enrollment**: Users configure 2FA from [Account Settings](/docs/user/profile-management/account-settings), navigating into the [MFA Workflow](/docs/auth/login-flow/mfa).
 - **Token Invalidation**: Admin modifications in [RBAC Permissions](/docs/user/rbac-permissions) or user bans in [Account Lifecycle](/docs/user/rbac-permissions/user-lifecycle) trigger automated [Session Revocation](/docs/auth/oauth-sso/session-management).
+
+- 📝 [Tải file cấu hình Authenticator TXT](/files/authenticator.txt)
