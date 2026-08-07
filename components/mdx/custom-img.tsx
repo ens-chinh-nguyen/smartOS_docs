@@ -81,11 +81,6 @@ export function CustomImg({
           onClick={handleOpen}
           {...props}
         />
-        {alt && (
-          <figcaption className="px-4 py-2 text-center text-xs text-fd-muted-foreground border-t border-fd-border/50 bg-fd-muted/30 font-medium">
-            {alt}
-          </figcaption>
-        )}
       </figure>
 
       <FullscreenModal
