@@ -33,8 +33,12 @@ function checkBasicAuth(request: NextRequest): boolean {
     const credentials = atob(base64Credentials);
     const [username, password] = credentials.split(':');
 
-    const expectedUser = process.env.AUTH_USER || 'admin';
-    const expectedPassword = process.env.AUTH_PASSWORD || '123456';
+    const expectedUser = process.env.AUTH_USER;
+    const expectedPassword = process.env.AUTH_PASSWORD;
+
+    if (!expectedUser || !expectedPassword) {
+      return false;
+    }
 
     return username === expectedUser && password === expectedPassword;
   } catch {
